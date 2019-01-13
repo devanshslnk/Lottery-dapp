@@ -49,6 +49,40 @@ class App extends Component {
         );
     }
 
+    CallLuckyDraw = async (event) => {
+        event.preventDefault();
+        const accounts = await web3.eth.getAccounts();
+        try {
+            await(contract.methods.luckyDraw().send({
+            "from":accounts[0],
+            
+        }));
+            alert("Hooray Lucky!")
+  //          a = await contract.methods.participantsAddresses[0]
+            console.log()
+            //currentAuctionAddress = await icoManagerContract.methods.currentAuction().call();
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
+
+    CallWithDraw = async (event) => {
+        event.preventDefault();
+        const accounts = await web3.eth.getAccounts();
+        try {
+            await(contract.methods.withdrawFund().send({
+            "from":accounts[0],
+            
+        }));
+            alert("Hooray withdraw!")
+            //currentAuctionAddress = await icoManagerContract.methods.currentAuction().call();
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
+
     getOwnerAddress = async (event) => {
         event.preventDefault();
 
@@ -95,7 +129,11 @@ class App extends Component {
                         <hr width="100"/>
 
                         <Button bsSize="large" bsStyle="info" onClick={this.getOwnerAddress}>View Owner Address</Button>
+                        <br/><br/>
+                        <Button bsSize="large" bsStyle="info" onClick={this.CallLuckyDraw}>Luck Draw</Button>
 
+                        <br/><br/>
+                        <Button bsSize="large" bsStyle="info" onClick={this.CallWithDraw}>With Draw</Button>
                         <br/><br/>
 
                         <hr width="100"/>
