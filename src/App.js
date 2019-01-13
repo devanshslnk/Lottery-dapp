@@ -12,7 +12,8 @@ class App extends Component {
 
     state = {
         message1 : '',
-        isMetaMask: false
+        isMetaMask: false,
+        value : 0,
     };
 
     async componentDidMount() {
@@ -34,31 +35,19 @@ class App extends Component {
         }
     }
 
-    addICOPhase = async (event) => {
+ 
+    submitParticipate = async (event) => {
         event.preventDefault();
 
+        const value = this.state.value;
         const accounts = await web3.eth.getAccounts();
 
-        //this.setState({message1: 'Waiting on transaction success..'});
-        try {
-            // await icoManagerContract.methods.addICOPhase(phaseName, startPrice, reservePrice,
-            //     minimumBidInWei, claimPeriod, walletAddress, intervalDuration, offerings).send(
-            //     {
-            //         from: accounts[0],
-            //         gas: '1000000'
-            //     }
-            // );
-
-            //this.setState({message1: 'New ICO phase has been successfully started'});
-
-        } catch (err) {
-            this.setState({message1: 'Error in adding new ICO phase'});
-        }
-        this.setState({
-            //clear state
-        });
-
-    };
+        await(contract.methods.participate().send({
+            "from":accounts[0],
+            "value": web3.utils.toWei(value),
+        })
+        );
+    }
 
     getOwnerAddress = async (event) => {
         event.preventDefault();
@@ -86,18 +75,18 @@ class App extends Component {
 
                         <h2 className="display-1 text-muted">{this.state.message1}</h2>
 
-                        <Form inline onSubmit={this.addICOPhase}>
+                        <Form inline onSubmit={this.submitParticipate}>
                             <FormGroup>
                                 <FormControl
                                     type="text"
-                                    name="phaseName"
+                                    name="value"
                                     placeholder="enter value in ether"
-                                    value={this.state.phaseName}
-                                    onChange={event => this.setState({phaseName: event.target.value})}/>
+                                    value={this.state.value}
+                                    onChange={event => this.setState({value: event.target.value})}/>
                                 </FormGroup>
                             <FormGroup>
                                 <Button bsSize="large" bsStyle="warning" type="submit">
-                                    Send Method
+                                    Participate
                                 </Button>
                             </FormGroup>
                         </Form>
@@ -105,7 +94,7 @@ class App extends Component {
                         <br/>
                         <hr width="100"/>
 
-                        <Button bsSize="large" bsStyle="info" onClick={this.getOwnerAddress}>Call Method</Button>
+                        <Button bsSize="large" bsStyle="info" onClick={this.getOwnerAddress}>View Owner Address</Button>
 
                         <br/><br/>
 
