@@ -50,6 +50,7 @@ class App extends Component {
             // );
 
             //this.setState({message1: 'New ICO phase has been successfully started'});
+
         } catch (err) {
             this.setState({message1: 'Error in adding new ICO phase'});
         }
@@ -67,6 +68,7 @@ class App extends Component {
         try {
             ownerAddress = await contract.methods.owner().call();
             alert(ownerAddress);
+            //currentAuctionAddress = await icoManagerContract.methods.currentAuction().call();
         } catch (err) {
             console.log(err);
         }
@@ -89,7 +91,7 @@ class App extends Component {
                                 <FormControl
                                     type="text"
                                     name="phaseName"
-                                    placeholder="enter"
+                                    placeholder="enter value in ether"
                                     value={this.state.phaseName}
                                     onChange={event => this.setState({phaseName: event.target.value})}/>
                                 </FormGroup>
@@ -103,7 +105,7 @@ class App extends Component {
                         <br/>
                         <hr width="100"/>
 
-                        <Button bsSize="large" bsStyle="info" onClick={this.getOwnerAddress}>Get Owner Address</Button>
+                        <Button bsSize="large" bsStyle="info" onClick={this.getOwnerAddress}>Call Method</Button>
 
                         <br/><br/>
 
