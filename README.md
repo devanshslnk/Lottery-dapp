@@ -1,5 +1,4 @@
 # Lottery-dapp
-<h1>Lottery System DApp </h1>
 
 <h3>
 The Lottery DApp has its solidity contract with functionality such as user can participate, A Owner can commence LuckyDraw and a selected participant can claim his money.
@@ -8,7 +7,9 @@ The Lottery DApp has its solidity contract with functionality such as user can p
 The Dapp simply resemble basic lottery functionality in decentralized way so people can have trust on of randomly being selected from maths and transperency of contract.
 </h3>
 <br>
+
 # Installation
+
 <br>
 <h3><b>git clone https://github.com/priyamshah112/Lottery-dapp<b></h3>
 
